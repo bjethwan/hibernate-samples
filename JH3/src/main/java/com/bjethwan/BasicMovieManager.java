@@ -26,6 +26,19 @@ public class BasicMovieManager {
 		return movie;
 	}
 	
+	
+	/** There's no need to call update on persisted hibernate objects **/
+	public Movie updateSynopsis(int movieId, String movieSynopsis)
+	{
+		Movie movie = null;
+		Session session = getAppSessionFactory().openSession();
+		session.beginTransaction();
+		movie = (Movie)session.get(Movie.class, movieId);
+		movie.setSynopsis(movieSynopsis);
+		session.getTransaction().commit();
+		return movie;
+	}
+	
 	public List<Movie> listAll()
 	{
 		List<Movie> list = null;
