@@ -30,4 +30,9 @@ public class Movie {
 	public void setSynopsis(String synopsis) {
 		this.synopsis = synopsis;
 	}
+	@Override
+	public String toString() {
+		
+		return "-- Movie -- \n\t ID : "+getId()+"\n\t Title: "+getTitle()+"\n";
+	}
 }
