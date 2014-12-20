@@ -1,4 +1,4 @@
-package com.bjethwan.domain.pojos;
+package com.bjethwan.entities;
 
 import java.util.Date;
 

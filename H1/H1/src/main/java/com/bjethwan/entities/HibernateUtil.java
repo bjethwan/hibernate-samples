@@ -1,4 +1,4 @@
-package com.bjethwan.domain.pojos;
+package com.bjethwan.entities;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;

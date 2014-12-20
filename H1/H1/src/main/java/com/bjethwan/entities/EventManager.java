@@ -1,36 +1,14 @@
-package com.bjethwan.domain.pojos;
+package com.bjethwan.entities;
 
 import org.hibernate.Session;
 
 import java.util.*;
 
 
-public class EventManager {
+public class EventManager 
+{
 
-	public static void main(String[] args) {
-		EventManager mgr = new EventManager();
-
-		if (args[0].equals("store")) {
-			mgr.createAndStoreEvent("My Event", new Date());
-		}else if (args[0].equals("list")) {
-			List events = mgr.listEvents();
-			for (int i = 0; i < events.size(); i++) {
-				Event theEvent = (Event) events.get(i);
-				System.out.println(
-						"Event: " + theEvent.getTitle() + " Time: " + theEvent.getDate()
-						);
-			}
-		}else if (args[0].equals("addpersontoevent")) {
-            Long eventId = mgr.createAndStoreEvent("My Event", new Date());
-            Long personId = mgr.createAndStorePerson("Foo", "Bar");
-            mgr.addPersonToEvent(personId, eventId);
-            System.out.println("Added person " + personId + " to event " + eventId);
-        }
-
-		HibernateUtil.getAppSessionFactory().close();
-	}
-
-	private Long createAndStoreEvent(String title, Date theDate) {
+	public Long createAndStoreEvent(String title, Date theDate) {
 		Session session = HibernateUtil.getAppSessionFactory().getCurrentSession();
 		session.beginTransaction();
 
@@ -42,7 +20,7 @@ public class EventManager {
 		return ret;
 	}
 	
-	private Long createAndStorePerson(String fname, String lname) {
+	public Long createAndStorePerson(String fname, String lname) {
 		Session session = HibernateUtil.getAppSessionFactory().getCurrentSession();
 		session.beginTransaction();
 
@@ -56,7 +34,7 @@ public class EventManager {
 		return ret;
 	}
 
-	private List listEvents() {
+	public List listEvents() {
 		Session session = HibernateUtil.getAppSessionFactory().getCurrentSession();
 		session.beginTransaction();
 		List result = session.createQuery("from Event").list();
@@ -64,7 +42,7 @@ public class EventManager {
 		return result;
 	}
 
-	private void addPersonToEvent(Long personId, Long eventId) {
+	public void addPersonToEvent(Long personId, Long eventId) {
 		Session session = HibernateUtil.getAppSessionFactory().getCurrentSession();
 		session.beginTransaction();
 
