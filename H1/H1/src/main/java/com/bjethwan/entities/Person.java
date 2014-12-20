@@ -5,14 +5,15 @@ import java.util.Set;
 
 public class Person {
 
-    private Long id;
-    private int age;
-    private String firstname;
-    private String lastname;
+	private Long id;
+	private int age;
+	private String firstname;
+	private String lastname;
 	private Set<Event> events = new HashSet<>();
-	
+	private Set<String> emailAddresses = new HashSet<>();
 
-    public Person() {}
+
+	public Person() {}
 
 	public Long getId() {
 		return id;
@@ -21,16 +22,27 @@ public class Person {
 	public void setId(Long id) {
 		this.id = id;
 	}
+
+
+
+	public Set<String> getEmailAddresses() {
+		return emailAddresses;
+	}
+
+	public void setEmailAddresses(Set<String> emailAddresses) {
+		this.emailAddresses = emailAddresses;
+	}
+
+	public Set getEvents() {
+		return events;
+	}
+
+	public void setEvents(Set events) {
+		this.events = events;
+	}
 	
-
-
-    public Set getEvents() {
-        return events;
-    }
-
-    public void setEvents(Set events) {
-        this.events = events;
-    }
+	
+	
 
 	public int getAge() {
 		return age;
@@ -56,10 +68,10 @@ public class Person {
 		this.lastname = lastname;
 	}
 
-   @Override
-public String toString() {
-	// TODO Auto-generated method stub
-	return "Person: Name: "+getFirstname()+" "+getLastname()+" Age: "+getAge()+"\n";
-}
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "Person: Name: "+getFirstname()+" "+getLastname()+" Age: "+getAge()+"\n";
+	}
 
 }

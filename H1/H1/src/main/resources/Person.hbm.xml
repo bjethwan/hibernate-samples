@@ -10,10 +10,17 @@
 		<property name="firstname" />
 		<property name="lastname" />
 		<property name="age" />
+		
 		<set name="events" table="PERSON_EVENT">
 			<key column="PERSON_ID" />
 			<many-to-many column="EVENT_ID" class="Event" />
 		</set>
+		
+		<set name="emailAddresses" table="PERSON_EMAIL_ADDRESS">
+			<key column="PERSON_ID"/>
+			<element column="EMAIL_ADDRESS" type="string"/>
+		</set>
+	
 	</class>
 
 </hibernate-mapping>

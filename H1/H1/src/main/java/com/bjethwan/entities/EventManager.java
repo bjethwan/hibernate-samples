@@ -42,7 +42,14 @@ public class EventManager
 		return result;
 	}
 
-	public void addPersonToEvent(Long personId, Long eventId) {
+	/**
+	 * automatic dirty checking
+	 * 
+	 * @param personId
+	 * @param eventId
+	 */
+	public void addPersonToEventInOneTransaction(Long personId, Long eventId) 
+	{
 		Session session = HibernateUtil.getAppSessionFactory().getCurrentSession();
 		session.beginTransaction();
 
@@ -50,6 +57,52 @@ public class EventManager
 		Event anEvent = (Event) session.load(Event.class, eventId);
 		aPerson.getEvents().add(anEvent);
 
+		session.getTransaction().commit();
+	}
+	
+	
+	/**
+	 * The call to update makes a detached object persistent again by binding it to a new unit of work, 
+	 * so any modifications you made to it while detached can be saved to the database. 
+	 * This includes any modifications (additions/deletions) you made to a collection of that entity object.
+	 * 
+	 * @param personId
+	 * @param eventId
+	 */
+	public void addPersonToEventInTwoTransaction(Long personId, Long eventId) 
+	{
+        Session session = HibernateUtil.getAppSessionFactory().getCurrentSession();
+        session.beginTransaction();
+
+        Person aPerson = (Person) session
+                .createQuery("select p from Person p left join fetch p.events where p.id = :pid")
+                .setParameter("pid", personId)
+                .uniqueResult(); // Eager fetch the collection so we can use it detached
+        Event anEvent = (Event) session.load(Event.class, eventId);
+
+        session.getTransaction().commit();
+
+        // End of first unit of work
+
+        aPerson.getEvents().add(anEvent); // aPerson (and its collection) is detached
+
+        // Begin second unit of work
+
+        Session session2 = HibernateUtil.getAppSessionFactory().getCurrentSession();
+        session2.beginTransaction();
+        session2.update(aPerson); // Reattachment of aPerson
+
+        session2.getTransaction().commit();
+    }
+	
+	public void addPersonEmailAddress(Long personId, String emailAdddress)
+	{
+		Session session = HibernateUtil.getAppSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		
+		Person aPerson = (Person)session.load(Person.class, personId);
+		aPerson.getEmailAddresses().add(emailAdddress);
+		
 		session.getTransaction().commit();
 	}
 }

@@ -31,8 +31,21 @@ public class Main
 		{
             Long eventId = mgr.createAndStoreEvent("My Event", new Date());
             Long personId = mgr.createAndStorePerson("Foo", "Bar");
-            mgr.addPersonToEvent(personId, eventId);
+            mgr.addPersonToEventInOneTransaction(personId, eventId);
             System.out.println("Added person " + personId + " to event " + eventId);
+        }
+		else if (args[0].equals("addpersontoevent2")) 
+		{
+            Long eventId = mgr.createAndStoreEvent("My Event", new Date());
+            Long personId = mgr.createAndStorePerson("Bipin", "Jethwani");
+            mgr.addPersonToEventInTwoTransaction(personId, eventId);
+            System.out.println("Added person " + personId + " to event " + eventId);
+        }
+		else if (args[0].equals("addpersonemail")) 
+		{
+            Long personId = mgr.createAndStorePerson("Shaurya", "Jethwani");
+            mgr.addPersonEmailAddress(personId, "test.test@yahoo.com");
+            System.out.println("Added person " + personId + " email address as " + "test.test@yahoo.com");
         }
 
 		HibernateUtil.getAppSessionFactory().close();
