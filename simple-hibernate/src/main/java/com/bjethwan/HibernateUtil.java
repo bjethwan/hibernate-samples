@@ -1,4 +1,5 @@
-package com.bjethwan.entities;
+package com.bjethwan;
+
 
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -20,7 +21,7 @@ public class HibernateUtil
 			ServiceRegistry serviceRegistry = 
 					new StandardServiceRegistryBuilder().
 						applySettings(configuration.getProperties()).
-							build();
+						build();
 			
 			SessionFactory sessionFactory = configuration.buildSessionFactory(serviceRegistry);
 			
