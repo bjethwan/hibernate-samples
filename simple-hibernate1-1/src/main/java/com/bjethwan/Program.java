@@ -8,35 +8,29 @@ public class Program {
 		
 		Session session = HibernateUtil.getAppSessionFactory().openSession();
 		
-	/** Transaction# 1 - Begin*/ 
+		//Transaction# 1
 		session.beginTransaction();
 		
 		User user = new User();
 		user.setName("Bipin");
-		user.setGoal(250);
+		user.getProteinData().setGoal(250);
 		
-		Integer userid = (Integer)session.save(user);	
-		
+		session.save(user);	
 		session.getTransaction().commit();
-	/** Transaction# 1 - End*/ 
 		
 		
-	/** Transaction# 2 - Begin*/ 
+		//Transaction# 2
 		session.beginTransaction();
 		
-		User dbUser = (User)session.load(User.class, userid);
-		System.out.println("User:" + dbUser.getName()+" Goal: "+dbUser.getGoal());
-		
-		dbUser.setTotal(dbUser.getTotal() + 50);
+		User dbUser = (User)session.load(User.class, 1);
+		System.out.println("User:" + dbUser.getName()+" Goal: "+dbUser.getProteinData().getGoal());
+		dbUser.getProteinData().setTotal(dbUser.getProteinData().getTotal()+50);
 		
 		session.getTransaction().commit();
-	/** Transaction# 2 - End*/
-		
-		
 		session.close();
+		
+		
 		HibernateUtil.getAppSessionFactory().close();
-		
-		
 	}
 }
 

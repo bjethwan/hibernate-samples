@@ -14,22 +14,22 @@ public class Program {
 		session.beginTransaction();
 		
 		User user = new User();
-		user.setName("Bipin");
-		user.getUserHistory().add(new UserHistory(new Date(), "Created new user Bipin"));
-		user.getProteinData().setGoal(250);
-		user.getUserHistory().add(new UserHistory(new Date(), "Set protein goal as 250"));
+		user.setName("Shaurya");
+		user.getUserHistory().add(new UserHistory(new Date(), "Created new user Shaurya"));
+		user.getProteinData().setGoal(100);
+		user.getUserHistory().add(new UserHistory(new Date(), "Set protein goal as 100"));
 		
-		session.save(user);	
+		Integer userid = (Integer)session.save(user);	
 		session.getTransaction().commit();
 		
 		
 		//Transaction# 2
 		session.beginTransaction();
 		
-		User dbUser = (User)session.load(User.class, 1);
+		User dbUser = (User)session.load(User.class, userid);
 		System.out.println("User:" + dbUser.getName()+" Goal: "+dbUser.getProteinData().getGoal());
-		dbUser.getProteinData().setTotal(dbUser.getProteinData().getTotal()+50);
-		dbUser.getUserHistory().add(new UserHistory(new Date(), "Existing total protein as 50"));
+		dbUser.getProteinData().setTotal(dbUser.getProteinData().getTotal()+5);
+		dbUser.getUserHistory().add(new UserHistory(new Date(), "Existing total protein as 5"));
 		
 		session.getTransaction().commit();
 		session.close();

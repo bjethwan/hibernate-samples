@@ -3,32 +3,30 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated Aug 16, 2015 3:25:26 PM by Hibernate Tools 3.4.0.CR1 -->
 
-<hibernate-mapping package="com.bjethwan">
-	<class name="User" table="USER">
-		<id name="id" type="int">
-			<column name="ID" />
-			<generator class="identity" />
-		</id>
-		<property name="name" type="java.lang.String">
-			<column name="NAME" />
-		</property>
-
-		<component name="proteinData">
-			<property name="goal" type="int">
-				<column name="GOAL" />
+	<hibernate-mapping package="com.bjethwan">
+		<class name="User" table="USER">
+			<id name="id" type="int">
+				<column name="ID" />
+				<generator class="identity" />
+			</id>
+			<property name="name" type="java.lang.String">
+				<column name="NAME" />
 			</property>
-			<property name="total" type="int">
-				<column name="TOTAL" />
-			</property>
-		</component>
-
-		<set name="userHistory" table="USER_HISTORY">
-			<key column="ID" />
-			<composite-element class="UserHistory">
-				<property name="entryDate"/>
-				<property name="entry"/>
-			</composite-element>
-		</set>
-	</class>
-</hibernate-mapping>
+			<component name="proteinData">
+				<property name="goal" type="int">
+					<column name="GOAL" />
+				</property>
+				<property name="total" type="int">
+					<column name="TOTAL" />
+				</property>
+			</component>
+			<set name="userHistory" table="USER_HISTORY">
+				<key column="ID" />
+				<composite-element class="UserHistory">
+					<property name="entryDate"/>
+					<property name="entry"/>
+				</composite-element>
+			</set>
+		</class>
+	</hibernate-mapping>
 
