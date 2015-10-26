@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 25, 2015 1:57:39 AM by Hibernate Tools 3.4.0.CR1 -->
+
+	<hibernate-mapping package="com.bjethwan">
+		<class name="PersonAddressEntryExit" table="PERSON_ADDRESS">
+			<composite-id name="personAddressId" class="com.bjethwan.PersonAddressId">
+				<key-property name="personId" column="PERSON_ID" />
+				<key-property name="addressId" column="ADDRESS_ID" />
+				<key-property name="entryDate" column="ENTRY_DATE" />
+			</composite-id>
+			<property name="exitDate" column="EXIT_DATE" />
+		</class>
+	</hibernate-mapping>
+
+	

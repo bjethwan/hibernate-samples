@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 16, 2015 3:25:26 PM by Hibernate Tools 3.4.0.CR1 -->
+
+	<hibernate-mapping package="com.bjethwan">
+		<class name="User" table="USER">
+			<id name="id" type="long">
+				<column name="ID" />
+				<generator class="assigned" />
+			</id>
+			<property name="name" type="java.lang.String">
+				<column name="NAME" />
+			</property>
+			
+		<component name="proteinData">
+			<property name="goal"/>
+			<property name="total"/>
+		</component>
+		
+		<set name="userHistory" table="USER_HISTORY">
+			<key column="USER_ID"/>
+			<composite-element class="UserHistory">
+				<property name="entryDate"/>
+				<property name="entry"/>
+			</composite-element>
+		</set>
+		
+		<set name="userEmailAddresses" table="USER_EMAIL">
+			<key column="USER_ID"/>
+			<element type="string" column="EMAIL_ADDRESS" unique="true"/>
+		</set>
+			
+			
+		</class>
+	</hibernate-mapping>
+
